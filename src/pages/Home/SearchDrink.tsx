@@ -31,8 +31,9 @@ export default function SearchDrink() {
             price={coffee.price}
             image={coffee.image}
             id={coffee.id}
-            description={coffee.description
-            } />
+            description={coffee.description}
+            detail={coffee.detail}
+          />
         ))}
       </div>
     </div>
