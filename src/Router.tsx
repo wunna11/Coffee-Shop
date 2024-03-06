@@ -5,19 +5,28 @@ import Login from "./pages/Login";
 import Order from "./pages/Order";
 import NoPage from "./pages/NoPage";
 import Proudct from "./pages/Proudct";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import { useAuthentication } from "./services/authService";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navbar />}>
-          <Route index path="/" element={<Home />} />
-          <Route path="/add-to-cart" element={<Login />} />
-          <Route path="/orders" element={<Order />} />
-          <Route path="/products" element={<Proudct />} />
-          <Route path="*" element={<NoPage />} />
+        <Route
+          element={
+            <PrivateRoute redirectTo="/login" isAuth={useAuthentication()} />
+          }
+        >
+          <Route path="/" element={<Navbar />}>
+            <Route index path="/" element={<Home />} />
+            <Route path="/orders" element={<Order />} />
+            <Route path="/products" element={<Proudct />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
         </Route>
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }

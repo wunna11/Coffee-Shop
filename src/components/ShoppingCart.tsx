@@ -72,7 +72,7 @@ function ShoppingCart(props: Props) {
   return (
     <Modal show={showModal} onClose={closeModal}>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="w-full max-w-md h-[600px] bg-white border border-gray-200 rounded-3xl shadow overflow-y-auto no-scrollbar">
+        <div className="w-full max-w-md h-[auto] max-h-[600px] bg-white border border-gray-200 rounded-3xl shadow overflow-y-auto no-scrollbar">
           <header className="p-4 shadow bg-background backdrop-blur-sm bg-background/30">
             <div className="flex items-center justify-between">
               <h5 className="text-xl font-bold leading-none text-primary">

@@ -17,7 +17,7 @@ function OrderData() {
     dispatch(loadAllOrder(res));
   }, [dispatch]);
 
-  if (!orderItems) {
+  if (orderItems.length <= 0) {
     return (
       <EmptyPage />
     )

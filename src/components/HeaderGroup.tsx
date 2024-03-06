@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "./Header";
 
 type Props = {
@@ -9,7 +10,7 @@ function HeaderGroup(props: Props) {
   return (
     <div className="flex justify-between">
       <Header title={title} />
-        <a href="/products" className="text-md">See All</a>
+        <Link to="/products" className="text-md">See All</Link>
       </div>
   );
 }

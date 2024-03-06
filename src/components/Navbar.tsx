@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -7,14 +7,18 @@ import {
 } from "@heroicons/react/24/outline";
 import { Outlet } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { loadAllCart, selectCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+import { Avatar, Dropdown } from 'flowbite-react';
+import { NavbarContext } from "../app/context";
+import { logout } from "../features/Auth/authSlice";
+
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  {name: "Proucts", href: "/products", current: false},
+  { name: "Proucts", href: "/products", current: false },
   { name: "Orders", href: "/orders", current: false },
 ];
 
@@ -30,12 +34,18 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const cartItems = useAppSelector(selectCart);
+  
+  const { username } = useContext(NavbarContext);
 
   useEffect(() => {
     const items = localStorage.getItem("cart item");
     const res = JSON.parse(items as string);
-    dispatch(loadAllCart(res))
+    dispatch(loadAllCart(res));
   }, [dispatch]);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  }
 
   return (
     <>
@@ -62,35 +72,37 @@ export default function Navbar() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <img
-                      src="/images/logo.png"
+                      src="/images/app-logo.png"
                       alt="gymLogo"
-                      className="h-12 w-auto"
+                      className="h-8 w-auto"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => {
-                        const isActive = currentPath === item.href ? true : false;
+                        const isActive =
+                          currentPath === item.href ? true : false;
                         return (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            isActive
-                              ? "bg-primary-700 text-white"
-                              : "text-primary hover:bg-primary-700 hover:text-white",
-                            "rounded-md px-3 py-3 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                        )
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              isActive
+                                ? "bg-primary-700 text-white"
+                                : "text-primary",
+                              "rounded-md px-3 py-3 text-sm font-medium"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </Link>
+                        );
                       })}
                     </div>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div className="flex space-x-8">
                   <button
                     type="button"
                     onClick={() => setShowModal(true)}
@@ -101,12 +113,37 @@ export default function Navbar() {
                       className="h-6 w-6 text-primary"
                       aria-hidden="true"
                     />
-                    {cartItems.length > 0  ? (
-                    <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-1 -end-1">
-                      {cartItems.length}
-                    </div>
+                    {cartItems.length > 0 ? (
+                      <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-1 -end-1">
+                        {cartItems.length}
+                      </div>
                     ) : null}
                   </button>
+
+                  <div className="flex md:order-2">
+                    <Dropdown
+                      arrowIcon={false}
+                      inline
+                      label={
+                        <Avatar
+                          alt="User settings"
+                          img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                          rounded
+                        />
+                      }
+                    >
+                      <Dropdown.Header>
+                          <span className="block text-sm">{username}</span>
+                      </Dropdown.Header>
+                      <Dropdown.Item>Dashboard</Dropdown.Item>
+                      <Dropdown.Item>Settings</Dropdown.Item>
+                      <Dropdown.Item>Profile</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item onClick={logoutHandler}>Sign out</Dropdown.Item>
+                    </Dropdown>
+                  </div>
+                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -135,8 +172,9 @@ export default function Navbar() {
         )}
       </Disclosure>
 
-      {showModal && <ShoppingCart
-        closeModal={() => setShowModal(false)} showModal={true}      />}
+      {showModal && (
+        <ShoppingCart closeModal={() => setShowModal(false)} showModal={true} />
+      )}
 
       <Outlet />
     </>

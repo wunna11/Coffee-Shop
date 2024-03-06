@@ -34,3 +34,7 @@ export function filterItems(items: any[], query: string) {
 export function calculateTotPrice(items: any[]) {
   return items.reduce((acc, curr) => acc + curr.quantity * curr.price, 0);
 }
+
+export function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
