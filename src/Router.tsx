@@ -12,18 +12,18 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+        {/*<Route
           element={
             <PrivateRoute redirectTo="/login" isAuth={useAuthentication()} />
           }
-        >
+        >*/}
           <Route path="/" element={<Navbar />}>
             <Route index path="/" element={<Home />} />
             <Route path="/orders" element={<Order />} />
             <Route path="/products" element={<Proudct />} />
             <Route path="*" element={<NoPage />} />
           </Route>
-        </Route>
+        {/*</Route>*/}
 
         <Route path="/login" element={<Login />} />
       </Routes>

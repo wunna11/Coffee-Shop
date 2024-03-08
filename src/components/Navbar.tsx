@@ -11,10 +11,9 @@ import { useLocation, Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { loadAllCart, selectCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
-import { Avatar, Dropdown } from 'flowbite-react';
+import { Avatar, Dropdown } from "flowbite-react";
 import { NavbarContext } from "../app/context";
 import { logout } from "../features/Auth/authSlice";
-
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -34,7 +33,7 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const cartItems = useAppSelector(selectCart);
-  
+
   const { username } = useContext(NavbarContext);
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export default function Navbar() {
 
   const logoutHandler = () => {
     dispatch(logout());
-  }
+  };
 
   return (
     <>
@@ -103,24 +102,24 @@ export default function Navbar() {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <div className="flex space-x-8">
-                  <button
-                    type="button"
-                    onClick={() => setShowModal(true)}
-                    className="relative rounded-full p-1 text-gray-400 hover:text-white"
-                  >
-                    <span className="absolute inset-1.5" />
-                    <ShoppingCartIcon
-                      className="h-6 w-6 text-primary"
-                      aria-hidden="true"
-                    />
-                    {cartItems.length > 0 ? (
-                      <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-1 -end-1">
-                        {cartItems.length}
-                      </div>
-                    ) : null}
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowModal(true)}
+                      className="relative rounded-full p-1 text-gray-400 hover:text-white"
+                    >
+                      <span className="absolute inset-1.5" />
+                      <ShoppingCartIcon
+                        className="h-6 w-6 text-primary"
+                        aria-hidden="true"
+                      />
+                      {cartItems.length > 0 ? (
+                        <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-1 -end-1">
+                          {cartItems.length}
+                        </div>
+                      ) : null}
+                    </button>
 
-                  <div className="flex md:order-2">
+                    {/*<div className="flex md:order-2">
                     <Dropdown
                       arrowIcon={false}
                       inline
@@ -141,9 +140,8 @@ export default function Navbar() {
                       <Dropdown.Divider />
                       <Dropdown.Item onClick={logoutHandler}>Sign out</Dropdown.Item>
                     </Dropdown>
+                  </div>*/}
                   </div>
-                  </div>
-                  
                 </div>
               </div>
             </div>

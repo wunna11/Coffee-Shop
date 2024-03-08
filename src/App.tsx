@@ -10,7 +10,7 @@ function App() {
   const dispatch = useDispatch();
   const userData = useAppSelector(selectAuth);
 
-  const username = userData?.data?.name
+  const username = userData?.data?.name;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,9 +18,9 @@ function App() {
     dispatch(loadAllToken(res));
   }, [dispatch]);
 
-  if (!userData) {
-    return <Login />;
-  }
+  //if (!userData) {
+  //  return <Login />;
+  //}
 
   return (
     <NavbarContext.Provider value={{ username }}>
