@@ -5,8 +5,6 @@ import Login from "./pages/Login";
 import Order from "./pages/Order";
 import NoPage from "./pages/NoPage";
 import Proudct from "./pages/Proudct";
-import PrivateRoute from "./components/Routes/PrivateRoute";
-import { useAuthentication } from "./services/authService";
 
 export default function Router() {
   return (

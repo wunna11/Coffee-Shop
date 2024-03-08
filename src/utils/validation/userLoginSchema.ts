@@ -2,7 +2,6 @@
 import { object, string } from 'yup';
 import { PASSWORD_MAX_LEN, PASSWORD_MIN_LEN } from './validation-format';
 import {
-  emailErrMsg,
   maxLenErrMsg,
   minLenErrMsg,
   requiredErrMsg,

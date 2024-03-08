@@ -3,7 +3,6 @@ import Router from "./Router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "./app/hooks";
 import { loadAllToken, selectAuth } from "./features/Auth/authSlice";
-import Login from "./pages/Login";
 import { NavbarContext } from "./app/context";
 
 function App() {

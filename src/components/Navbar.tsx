@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -11,9 +11,6 @@ import { useLocation, Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { loadAllCart, selectCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
-import { Avatar, Dropdown } from "flowbite-react";
-import { NavbarContext } from "../app/context";
-import { logout } from "../features/Auth/authSlice";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -34,7 +31,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const cartItems = useAppSelector(selectCart);
 
-  const { username } = useContext(NavbarContext);
+  //const { username } = useContext(NavbarContext);
 
   useEffect(() => {
     const items = localStorage.getItem("cart item");
@@ -42,9 +39,9 @@ export default function Navbar() {
     dispatch(loadAllCart(res));
   }, [dispatch]);
 
-  const logoutHandler = () => {
-    dispatch(logout());
-  };
+  //const logoutHandler = () => {
+  //  dispatch(logout());
+  //};
 
   return (
     <>

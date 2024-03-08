@@ -7,7 +7,7 @@ import { userLoginSchema } from "../utils/validation/userLoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthentication } from "../services/authService";
 import { useAppDispatch } from "../app/hooks";
-import { apiLogin } from "../features/Auth/authSlice";
+import { User, apiLogin } from "../features/Auth/authSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,11 +21,10 @@ export default function Login() {
     resolver: yupResolver(userLoginSchema),
   });
 
-  const { handleSubmit, setError } = methods;
+  const { handleSubmit } = methods;
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: User) => {
     dispatch(apiLogin(data));
-    console.log('reacth')
   };
 
   useEffect(() => {
