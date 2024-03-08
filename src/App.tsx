@@ -12,12 +12,9 @@ function App() {
 
   const username = userData?.data?.name
 
-  console.log('user data', userData.data)
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const res = JSON.parse(token as string);
-    console.log('res', res)
     dispatch(loadAllToken(res));
   }, [dispatch]);
 

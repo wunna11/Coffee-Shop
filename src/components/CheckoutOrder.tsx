@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { loadAllCart, selectCart } from "../features/cartSlice";
 import { Modal as ModalComp } from "flowbite-react";
 import { useAppSelector } from "../app/hooks";
-import EmptyShoppingCart from "./EmptyShoppingCart";
 import CheckboxPayment from "./CheckboxPayment";
 import { Payment } from "../types";
 import { addOrder } from "../features/orderSlice";
@@ -42,11 +41,8 @@ function CheckoutOrder(props: Props) {
     };
 
     dispatch(addOrder(checkoutItems));
+    dispatch(loadAllCart(0))
     successCloseModal();
-  }
-
-  if (cartItems.length <= 0) {
-    return <EmptyShoppingCart closeModal={closeModal} showModal={true} />;
   }
 
   return (
@@ -97,7 +93,7 @@ function CheckoutOrder(props: Props) {
                 <div className="flex flex-col justify-between space-y-2 py-2">
                   <div className="grid grid-cols-1">
                     {cartItems.map((item) => (
-                      <>
+                      <div key={item.id}>
                         <div className="flex justify-between">
                           <div className="flex space-x-4">
                             <h5>{item.quantity}x</h5>
@@ -107,7 +103,7 @@ function CheckoutOrder(props: Props) {
                           </div>
                           <h5>MMK {item.quantity * item.price}</h5>
                         </div>
-                      </>
+                      </div>
                     ))}
                   </div>
                   <div className="flex justify-between">

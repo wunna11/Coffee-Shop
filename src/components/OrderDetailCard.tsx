@@ -33,7 +33,7 @@ function OrderDetailCard(props: Props) {
               <div className="flex flex-col justify-between space-y-2 py-2">
                 <div className="grid grid-cols-1">
                   {cartItems?.map((item) => (
-                    <>
+                    <div key={item.id}>
                       <div className="flex justify-between">
                         <div className="flex space-x-4">
                           <h5>{item.quantity}x</h5>
@@ -41,7 +41,7 @@ function OrderDetailCard(props: Props) {
                         </div>
                         <h5>MMK {item.quantity * item.price}</h5>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
               </div>

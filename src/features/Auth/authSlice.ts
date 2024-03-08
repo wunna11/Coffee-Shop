@@ -43,7 +43,6 @@ export const authSlice = createSlice({
       window.location.reload();
     },
     loadAllToken: (state, action) => {
-      console.log('action', action.payload)
       state.data = action.payload 
     }
   },
