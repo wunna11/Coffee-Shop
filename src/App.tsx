@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import Router from "./Router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "./app/hooks";
@@ -22,9 +22,11 @@ function App() {
   //}
 
   return (
-    <NavbarContext.Provider value={{ username }}>
-      <Router />
-    </NavbarContext.Provider>
+    <Fragment>
+      <NavbarContext.Provider value={{ username }}>
+        <Router />
+      </NavbarContext.Provider>
+    </Fragment>
   );
 }
 
